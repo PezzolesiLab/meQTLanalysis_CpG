@@ -1,0 +1,6 @@
+min_model/input/
+min_model/output/
+min_model/script/CpG_pheno.txt
+max_model/input/
+max_model/output/
+max_model/script/CpG_pheno.txt
