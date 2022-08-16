@@ -22,10 +22,11 @@ For best results empty the output files before starting a new run.
 
 Order to run scripts:
 ````
-1. 1_makeSNPTEST_3.R
-2. 2_afterSNPTEST_3.R
-3. 3_afterSNPTESTplot_3.R
+1_makeSNPTEST_3.R
+2_afterSNPTEST_3.R
+3_afterSNPTESTplot_3.R
 ````
 
-minimal model includes the following covariates: gender CD8T CD4T NK Bcell Mono run
-maximal model includes the following covariates: gender AGE DUR logA1c CD8T CD4T NK Bcell Mono run
+Minimal model includes the following covariates: gender CD8T CD4T NK Bcell Mono run
+
+Maximal model includes the following covariates: gender AGE DUR logA1c CD8T CD4T NK Bcell Mono run
