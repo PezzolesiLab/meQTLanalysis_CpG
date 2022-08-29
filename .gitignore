@@ -1,6 +1,6 @@
-min_model/input/
+min_model/input/snptest_pheno_14CpG_final.sample
 min_model/output/
 min_model/script/CpG_pheno.txt
-max_model/input/
+max_model/input/snptest_pheno_14CpG_final.sample
 max_model/output/
 max_model/script/CpG_pheno.txt

@@ -1,13 +1,16 @@
 groupWD<-"/uufs/chpc.utah.edu/common/home/pezzolesi-group1/"
-setwd(paste0(groupWD,"Joslin_data/meQTLanalysis_CpG49/max_model/output"))
+#FIXME: change this path to match your output directory
+setwd(paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/max_model/output"))
 impute=paste0(groupWD,"Joslin_data/imputation_v3_20160516/JOSLIN_Merged")
-gexp<-read.table("../input/snptest_pheno_CpG_final.sample",header=T,stringsAsFactors=F,na="-9")
+#FIXME:change to match path to input file
+gexp<-read.table("../input/snptest_pheno_14CpG_final.sample",header=T,stringsAsFactors=F,na="-9")
 gexp<-gexp[-1,]
 gName<-colnames(gexp)[6:ncol(gexp)]
-gTop<-read.table("../script/CpG_pheno_test.txt",header=T,
+gTop<-read.table("../script/CpG_pheno.txt",header=T,
 	stringsAsFactors=F,sep="\t")
 g<-gTop[,1]
-pDir<-paste0(groupWD,"Joslin_data/meQTLanalysis_CpG49/max_model/")
+#FIXME: make sure the path is correct
+pDir<-paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/max_model/")
 
 for(i in g){
 	system(paste0("mkdir ",i))
@@ -15,8 +18,10 @@ for(i in g){
 	system("mkdir bash")
 	system("mkdir out")
 	setwd("./bash")
-	snptest<-"~/modules/snptest_v2.5.4-beta3_linux_x86_64_dynamic/snptest_v2.5.4-beta3"
-	pheno<-paste0(pDir,"input/snptest_pheno_CpG_final.sample")
+	#FIXME: change to match path to snptools
+	snptest<-"~/software/snptest_v2.5.6_CentOS_Linux7.8.2003-x86_64_dynamic/snptest_v2.5.6"
+	#FIXME:make sure this matches the path to the input file
+	pheno<-paste0(pDir,"input/snptest_pheno_14CpG_final.sample")
 	
 	for(j in 1:22){
 		sink(paste0("chr",j,".job"))
@@ -34,7 +39,8 @@ for(i in g){
 #                cat("#SBATCH --account=pezzolesi\n")
 #                cat("#SBATCH --partition=ember\n")
     		cat("#SBATCH --mail-type=FAIL\n")
-    		cat("#SBATCH --mail-user=marcus.pezzolesi@hsc.utah.edu\n")
+		#FIXME: change to match your email
+    		cat("#SBATCH --mail-user=devorah.stucki@hsc.utah.edu\n")
 		cmd<-paste0(snptest," -data ",impute,"/JOSLIN_Merged_chr",j,
 			".dose.vcf.gz ",pheno,
 			" -genotype_field GP -frequentist 1 ",
