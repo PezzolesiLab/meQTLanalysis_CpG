@@ -1,10 +1,11 @@
 combChr<-function(trait){
+	#FIXME: change following 2 lines to match WD
 	groupWD<-"/uufs/chpc.utah.edu/common/home/pezzolesi-group1/"
 	setwd(paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/min_model/output/",trait,
 		"/out"))
 	data<-c()
 	for(j in 1:22){
-		x<-read.table(paste0("chr",j,".out"),header=T,
+		x<-read.table(paste0("chr",j,".min.out"),header=T,
 			stringsAsFactors=F,fill=T)
 		x<-x[!is.na(x$frequentist_add_pvalue) & 
 			!is.na(x$frequentist_add_se_1),1:24]
