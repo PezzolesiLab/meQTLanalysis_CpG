@@ -1,10 +1,13 @@
 groupWD<-"/uufs/chpc.utah.edu/common/home/pezzolesi-group1/"
-gTop<-read.table("../script/KIM1_pheno_micronormo_2.txt",header=T,
+#FIXME: Change to match phenotype table
+gTop<-read.table("../script/CpG_pheno.txt",header=T,
 	stringsAsFactors=F,sep="\t")
-pDir<-paste0(groupWD,"Joslin_data/KIM1_project.MSDdata_analysis/")
+#FIXME:Change to match working directory
+pDir<-paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/min_model/")
 
 for(i in gTop[,1]){
-	setwd(paste0(groupWD,"Joslin_data/KIM1_project.MSDdata_analysis/output/",
+	#FIXME: change to match output directory
+	setwd(paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/min_model/output/",
 		i,"/out"))
 	sink("plotParameter.R")
 	cat(paste0("fileA=\"",i,"_MAF5_RSQ3_all_chr.txt","\"\n"))
