@@ -1,9 +1,9 @@
 ## Getting Started
 
-### Instalation
+### Dependencies
 Download SNPtools using the [online guide](https://www.well.ox.ac.uk/~gav/snptest/#download).
 
-### Set up
+### Instalation
 Create input and output files in both the min_model file and the max model file. Create a softlink or place your data in both of the input files.
 
 Correct the absolute path's in min_model/scripts and max_model/scripts. This includes changing the path to your input file and the absolute path to your install of SNPtools. The lines that need to be changed are marked in the file. Add the list of CpG islands you would like to run SNP tools on. Make sure the name matches the column name of the input file. This file should be saved as "CpG_pheno.txt", and formated like the example bellow
@@ -15,7 +15,7 @@ cg00002
 ...
 ````
 
-## Functionality
+## Execute Program
 For best results empty the output files before starting a new run.
 
 Order to run scripts:
