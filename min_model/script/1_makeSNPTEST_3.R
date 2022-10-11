@@ -1,15 +1,16 @@
-groupWD<-"/uufs/chpc.utah.edu/common/home/pezzolesi-group1/"
-setwd(paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/min_model/output"))
-impute=paste0(groupWD,"Joslin_data/imputation_v3_20160516/JOSLIN_Merged")
+groupWD<-"/scratch/general/vast/u1311353/"
+#FIXME: change this path to match your output directory
+setwd(paste0(groupWD,"V2_meQTLanalysis_CpG14/min_model/output"))
+impute=paste0("/uufs/chpc.utah.edu/common/home/pezzolesi-group1/Joslin_data/imputation_v3_20160516/JOSLIN_Merged")
 #FIXME: change this file name to match the name of the input file
-gexp<-read.table("../input/snptest_pheno_14CpG_final.sample",header=T,stringsAsFactors=F,na="-9")
+gexp<-read.table("../input/snptest_pheno_14CpG_finalv2.sample",header=T,stringsAsFactors=F,na="-9")
 gexp<-gexp[-1,]
 gName<-colnames(gexp)[6:ncol(gexp)]
 #phenotype list
 gTop<-read.table("../script/CpG_pheno.txt",header=T,
 	stringsAsFactors=F,sep="\t")
 g<-gTop[,1]
-pDir<-paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/min_model/")
+pDir<-paste0(groupWD,"V2_meQTLanalysis_CpG14/min_model/")
 
 for(i in g){
 	system(paste0("mkdir ",i))
@@ -20,7 +21,7 @@ for(i in g){
 	#FIXME:change this line to match the path to the snptest executable
 	snptest<-"~/software/snptest_v2.5.6_CentOS_Linux7.8.2003-x86_64_dynamic/snptest_v2.5.6"
 	#FIXME:Make sure this path matches the input file
-	pheno<-paste0(pDir,"input/snptest_pheno_14CpG_final.sample")
+	pheno<-paste0(pDir,"input/snptest_pheno_14CpG_finalv2.sample")
 	
 	for(j in 1:22){
 		sink(paste0("chr",j,".job"))
@@ -33,8 +34,8 @@ for(i in g){
     		cat("#SBATCH -n 1\n")
 		cat("#SBATCH -N 1\n")	
 # 		 cat("#SBATCH -C \"em037\"\n")
-		cat("#SBATCH --account=pezzolesi-np\n")
-		cat("#SBATCH --partition=pezzolesi-np\n")
+		cat("#SBATCH --account=pezzolesi\n")
+		cat("#SBATCH --partition=notchpeak\n")
 #                cat("#SBATCH --account=pezzolesi\n")
 #                cat("#SBATCH --partition=ember\n")
     		cat("#SBATCH --mail-type=FAIL\n")
@@ -43,7 +44,7 @@ for(i in g){
 			".dose.vcf.gz ",pheno,
 			" -genotype_field GP -frequentist 1 ",
 			"-pheno ",i,
-			" -use_raw_phenotypes -cov_names gender CD8T CD4T NK Bcell Mono run ",
+			" -use_raw_phenotypes -cov_names AGE logegfr logA1c logACR Hypertension com_NK run ",
 			"-method score -o ../out/chr",j,".min.out",
 			" -missing_code -9")
 		cat(cmd)

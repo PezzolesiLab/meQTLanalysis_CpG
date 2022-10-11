@@ -1,16 +1,16 @@
-groupWD<-"/uufs/chpc.utah.edu/common/home/pezzolesi-group1/"
+groupWD<-"/scratch/general/vast/u1311353/"
 #FIXME: change this path to match your output directory
-setwd(paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/max_model/output"))
-impute=paste0(groupWD,"Joslin_data/imputation_v3_20160516/JOSLIN_Merged")
+setwd(paste0(groupWD,"V2_meQTLanalysis_CpG14/max_model/output"))
+impute=paste0("/uufs/chpc.utah.edu/common/home/pezzolesi-group1/Joslin_data/imputation_v3_20160516/JOSLIN_Merged")
 #FIXME:change to match path to input file
-gexp<-read.table("../input/snptest_pheno_14CpG_final.sample",header=T,stringsAsFactors=F,na="-9")
+gexp<-read.table("../input/snptest_pheno_14CpG_finalv2.sample",header=T,stringsAsFactors=F,na="-9")
 gexp<-gexp[-1,]
 gName<-colnames(gexp)[6:ncol(gexp)]
 gTop<-read.table("../script/CpG_pheno.txt",header=T,
 	stringsAsFactors=F,sep="\t")
 g<-gTop[,1]
 #FIXME: make sure the path is correct
-pDir<-paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/max_model/")
+pDir<-paste0(groupWD,"V2_meQTLanalysis_CpG14/max_model/")
 
 for(i in g){
 	system(paste0("mkdir ",i))
@@ -21,7 +21,7 @@ for(i in g){
 	#FIXME: change to match path to snptools
 	snptest<-"~/software/snptest_v2.5.6_CentOS_Linux7.8.2003-x86_64_dynamic/snptest_v2.5.6"
 	#FIXME:make sure this matches the path to the input file
-	pheno<-paste0(pDir,"input/snptest_pheno_14CpG_final.sample")
+	pheno<-paste0(pDir,"input/snptest_pheno_14CpG_finalv2.sample")
 	
 	for(j in 1:22){
 		sink(paste0("chr",j,".job"))
@@ -34,8 +34,8 @@ for(i in g){
     		cat("#SBATCH -n 1\n")
 		cat("#SBATCH -N 1\n")	
 # 		 cat("#SBATCH -C \"em037\"\n")
-		cat("#SBATCH --account=pezzolesi-np\n")
-		cat("#SBATCH --partition=pezzolesi-np\n")
+		cat("#SBATCH --account=pezzolesi\n")
+		cat("#SBATCH --partition=notchpeak\n")
 #                cat("#SBATCH --account=pezzolesi\n")
 #                cat("#SBATCH --partition=ember\n")
     		cat("#SBATCH --mail-type=FAIL\n")
@@ -45,7 +45,7 @@ for(i in g){
 			".dose.vcf.gz ",pheno,
 			" -genotype_field GP -frequentist 1 ",
 			"-pheno ",i,
-			" -use_raw_phenotypes -cov_names gender AGE DUR logA1c CD8T CD4T NK Bcell Mono run ",
+			" -use_raw_phenotypes -cov_names gender AGE DUR logegfr logA1c logACR Hypertension com_CD8T com_CD4T com_NK com_Bcell com_Mono run ",
 			"-method score -o ../out/chr",j,".max.out",
 			" -missing_code -9")
 		cat(cmd)
