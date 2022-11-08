@@ -1,10 +1,10 @@
-groupWD<-"/uufs/chpc.utah.edu/common/home/pezzolesi-group1/"
-gTop<-read.table("../script/KIM1_pheno_micronormo.txt",header=T,
+groupWD<-"/scratch/general/vast/u1311353/"
+gTop<-read.table("../script/CpG_pheno.txt",header=T,
 	stringsAsFactors=F,sep="\t")
-pDir<-paste0(groupWD,"Joslin_data/KIM1_project.MSDdata_analysis")
+pDir<-paste0(groupWD,"V2_meQTLanalysis_CpG14/max_model")
 
 for(i in gTop[,1]){
-	setwd(paste0(groupWD,"Joslin_data/KIM1_project.MSDdata_analysis/output/",
+	setwd(paste0(groupWD,"V2_meQTLanalysis_CpG14/max_model/output/",
 		i,"/out"))
 	sink(paste0(i,".job"))
 	cat("#!/bin/bash\n")
@@ -15,9 +15,9 @@ for(i in gTop[,1]){
     	cat("#SBATCH --mem=20000\n")
     	cat("#SBATCH -n 1\n")
 	cat("#SBATCH -N 1\n")
-	cat("#SBATCH -p lonepeak\n")	
+	cat("#SBATCH --partition=pezzolesi\n")	
 	cat("#SBATCH --account=pezzolesi\n")
-    	cat("#SBATCH --mail-type=FAIL,END\n")
+    	cat("#SBATCH --mail-type=FAIL\n")
     	cat("#SBATCH --mail-user=devorah.stucki@hsc.utah.edu\n")
 	cat("\n")
 	cat("module load R\n")

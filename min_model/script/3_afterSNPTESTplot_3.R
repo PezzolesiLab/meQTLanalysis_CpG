@@ -1,13 +1,13 @@
-groupWD<-"/uufs/chpc.utah.edu/common/home/pezzolesi-group1/"
+groupWD<-"/scratch/general/vast/u1311353/"
 #FIXME: Change to match phenotype table
 gTop<-read.table("../script/CpG_pheno.txt",header=T,
 	stringsAsFactors=F,sep="\t")
 #FIXME:Change to match working directory
-pDir<-paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/min_model/")
+pDir<-paste0(groupWD,"V2_meQTLanalysis_CpG14/min_model")
 
 for(i in gTop[,1]){
 	#FIXME: change to match output directory
-	setwd(paste0(groupWD,"Joslin_data/meQTLanalysis_CpG14/min_model/output/",
+	setwd(paste0(groupWD,"V2_meQTLanalysis_CpG14/min_model/output/",
 		i,"/out"))
 	sink("plotParameter.R")
 	cat(paste0("fileA=\"",i,"_MAF5_RSQ3_all_chr.txt","\"\n"))
@@ -22,9 +22,9 @@ for(i in gTop[,1]){
     	cat("#SBATCH --mem=10000\n")
     	cat("#SBATCH -n 1\n")
 	cat("#SBATCH -N 1\n")
-	cat("#SBATCH -p pezzolesi-np\n")	
-	cat("#SBATCH --account=pezzolesi-np\n")
-    	cat("#SBATCH --mail-type=FAIL,END\n")
+	cat("#SBATCH -p lonepeak\n")	
+	cat("#SBATCH --account=pezzolesi\n")
+    	cat("#SBATCH --mail-type=FAIL\n")
     	cat("#SBATCH --mail-user=devorah.stucki@hsc.utah.edu\n")
 	cat("\n")
 	cat("module load R\n")

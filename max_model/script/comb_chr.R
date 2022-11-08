@@ -1,10 +1,10 @@
 combChr<-function(trait){
-	groupWD<-"/uufs/chpc.utah.edu/common/home/pezzolesi-group1/"
-	setwd(paste0(groupWD,"Joslin_data/KIM1_project.MSDdata_analysis/output/",trait,
+	groupWD<-"/scratch/general/vast/u1311353/"
+	setwd(paste0(groupWD,"V2_meQTLanalysis_CpG14/max_model/output/",trait,
 		"/out"))
 	data<-c()
 	for(j in 1:22){
-		x<-read.table(paste0("chr",j,".out"),header=T,
+		x<-read.table(paste0("chr",j,".max.out"),header=T,
 			stringsAsFactors=F,fill=T)
 		x<-x[!is.na(x$frequentist_add_pvalue) & 
 			!is.na(x$frequentist_add_se_1),1:24]
