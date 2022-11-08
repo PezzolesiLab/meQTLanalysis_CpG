@@ -1,6 +1,10 @@
+### Command Line arguments needed
+# complete path to output dir
+# complete path to input file
 groupWD<-"/scratch/general/vast/u1311353/"
 #FIXME: change this path to match your output directory
-setwd(paste0(groupWD,"V2_meQTLanalysis_CpG14/min_model/output"))
+setwd(paste0(groupWD,"V2_meQTLanalysis_CpG14/min_model/output")
+#this is the path to a reference directory located in the group space
 impute=paste0("/uufs/chpc.utah.edu/common/home/pezzolesi-group1/Joslin_data/imputation_v3_20160516/JOSLIN_Merged")
 #FIXME: change this file name to match the name of the input file
 gexp<-read.table("../input/snptest_pheno_14CpG_finalv2.sample",header=T,stringsAsFactors=F,na="-9")
@@ -33,12 +37,13 @@ for(i in g){
     		cat("#SBATCH --mem=1000\n")
     		cat("#SBATCH -n 1\n")
 		cat("#SBATCH -N 1\n")	
-# 		 cat("#SBATCH -C \"em037\"\n")
+		#FIXME: Change run node here
 		cat("#SBATCH --account=pezzolesi\n")
 		cat("#SBATCH --partition=notchpeak\n")
 #                cat("#SBATCH --account=pezzolesi\n")
 #                cat("#SBATCH --partition=ember\n")
     		cat("#SBATCH --mail-type=FAIL\n")
+		#FIXME: change email address here
     		cat("#SBATCH --mail-user=devorah.stucki@hsc.utah.edu\n")
 		cmd<-paste0(snptest," -data ",impute,"/JOSLIN_Merged_chr",j,
 			".dose.vcf.gz ",pheno,
