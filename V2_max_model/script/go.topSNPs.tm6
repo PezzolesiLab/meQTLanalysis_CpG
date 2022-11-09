@@ -1,0 +1,6 @@
+#logKIM1_Newmicronormo
+awk '{
+    if (NR==1 || $21 <0.000001) print $0
+}' /uufs/chpc.utah.edu/common/home/pezzolesi-group1/Joslin_data/KIM1_project.MSDdata_analysis/output/logKIM1_Newmicronormo/out/logKIM1_Newmicronormo_MAF5_RSQ3_all_chr.txt > /uufs/chpc.utah.edu/common/home/pezzolesi-group1/Joslin_data/KIM1_project.MSDdata_analysis/output/logKIM1_Newmicronormo/out/logKIM1_Newmicronormo_MAF5_RSQ3_all_chr.tm6.txt
+
+wc -l /uufs/chpc.utah.edu/common/home/pezzolesi-group1/Joslin_data/KIM1_project.MSDdata_analysis/output/logKIM1_Newmicronormo/out/logKIM1_Newmicronormo_MAF5_RSQ3_all_chr.tm6.txt
